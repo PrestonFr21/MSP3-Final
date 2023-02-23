@@ -1,6 +1,5 @@
 // DEPENDENCIES
 const express = require("express");
-const ejs = require('ejs')
 const app = express();
 // const cors = require("cors");
 
@@ -15,6 +14,12 @@ app.get('/', (req, res) => {
         message: 'Welcome to ...',
     })
 })
+
+// CONTROLLERS
+const forSaleItemsController = require('')
+app.use('', forSaleItemsController)
+
+
 
 
 app.listen(process.env.PORT, () => {
