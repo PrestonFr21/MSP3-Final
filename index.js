@@ -16,8 +16,8 @@ app.get('/', (req, res) => {
 })
 
 // CONTROLLERS
-const forSaleItemsController = require('')
-app.use('', forSaleItemsController)
+const itemsController = require('./controllers/items_controller')
+app.use('/items', forSaleItemsController)
 
 
 
