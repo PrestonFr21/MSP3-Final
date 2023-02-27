@@ -1,26 +1,22 @@
 const mongoose = require('mongoose');
+require('mongoose-type-url');
 const Schema  = mongoose.Schema;
 
 const ItemsSchema = new Schema ({
     name: {
         type: String,
-        required: true
     },
     price: {
         type: Number,
-        required: true
     },
     forSale: {
         type: Boolean,
-        required: true
     },
     purchased: {
         type: Boolean,
-        required: true
     },
     picture: {
-        type: String,
-        required: true
+        type: mongoose.SchemaTypes.Url,
     },
 
     user: {
