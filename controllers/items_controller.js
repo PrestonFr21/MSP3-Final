@@ -1,25 +1,27 @@
 const express = require('express')
-const res = require('express/lib/response')
-const items = require('express').Router;
-const db = require("../models");
+const items = express.Router()
 const Items = require('../models/items.js')
 
+ items.post('/', async (req, res) => {
+    const item = await Items.create(req.body)
+    res.json(item)
+  })
 
  // INDEX
-items.get('/', (req, res) => {
-    Items.find()
-        .then(foundItems => {
-            res.render('index', {
-                Items: foundItems,
-                title: 'Index Page'
-            })
-        })
-})
+ items.get("/", async (req, res) => {
+    try {
+      const foundItem = await Items.find({});
+      res.status(200).json(foundItem);
+    } catch (error) {
+      res.status(500).json(error);
+      console.log(error)
+    }
+  });
 
-//FIND A SPECIFIC INGREDIENT
+//FIND A SPECIFIC ITEM
 items.get('/:id', async (req, res) => {
     try {
-        const foundItem = await Item.findOne({
+        const foundItem = await Items.find({
             where: { items_id: req.params.id }
         })
         res.status(200).json(foundItem)
@@ -30,18 +32,29 @@ items.get('/:id', async (req, res) => {
     }
 })
 
+// EDIT
+items.get('/:id/edit', (req, res) => {
+    Items.findById(req.params.id)
+    .then(foundItem => {
+      res.render('edit', {
+        item: foundItem
+      })
+    })
+    
+  })
+
 
 // CREATE
-items.post('/', async(req, res) => {
-    try {
-        const newItem = await Items.create(req.body)
-        res.status(200).json(newItem);
+// items.post('/', async(req, res) => {
+//     try {
+//         const newItem = await Items.create(req.body)
+//         res.status(200).json(newItem);
 
-    } catch (error) {
-        console.log(error.message);
-        res.status(500).json({message: error.message})
-    }
-})
+//     } catch (error) {
+//         console.log(error.message);
+//         res.status(500).json({message: error.message})
+//     }
+// })
 
 // DELETE 
 items.delete('/:id', async (req, res) => {
@@ -60,6 +73,24 @@ items.delete('/:id', async (req, res) => {
     }
 })
 
+// in the new route
+items.get('/new', (req, res) => {
+    Items.find()
+        .then(foundItems => {
+            res.render('new', {
+                items: foundItems
+            })
+      })
+})
+
+//UPDATE
+items.put('/:id', (res, req) => {
+    Items.findByIdAndUpdate(req.params.id, req.body, { new: true }) 
+    .then(updatedItem => {
+      console.log(updatedItem) 
+      res.redirect(`/items/${req.params.id}`) 
+    })
+})
 
 
 module.exports = items
