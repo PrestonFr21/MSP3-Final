@@ -13,7 +13,7 @@ function Default(html) {
       <body>
         <div className="wrapper">
           <header>
-            <h1><a href="/items">ForSale</a></h1>
+            <h1><a href="/breads">PRIME PICKS</a></h1>
           </header>
           <div className="container">
             {html.children}

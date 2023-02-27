@@ -1,5 +1,5 @@
 const React = require('react')
-const Default = require('./layouts/default')
+const Default = require('./layouts/Default')
 
 
 function Index ({items})  {
@@ -9,7 +9,7 @@ function Index ({items})  {
         <div className="newButton">
             <a href="/items/new"><button>Add a new item</button></a>
         </div>
-        {/* <ul>
+        <ul>
         {
             items.map((item, index)=> {
                 return (
@@ -22,7 +22,7 @@ function Index ({items})  {
                 )
             })
         }
-        </ul> */}
+        </ul>
       </Default>
     )
 }

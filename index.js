@@ -1,7 +1,6 @@
 // DEPENDENCIES
 const express = require("express");
-const methodOverride = require('method-override')
-const ejs = require('ejs');
+const methodOverride = require('method-override');
 const mongoose = require('mongoose');
 //const cors = require("cors");
 
@@ -27,7 +26,7 @@ app.use(methodOverride('_method'))
 // ROOT
 app.get('/', (req, res) => {
     res.status(200).json({
-        message: 'Welcome to ...',
+        message: 'Welcome to PRIME PICKS',
     })
 })
 
