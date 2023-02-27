@@ -16,7 +16,6 @@ const Items = require('../models/items.js')
       res.status(500).json(error);
       console.log(error)
     }
-    
   });
 
 //FIND A SPECIFIC ITEM
