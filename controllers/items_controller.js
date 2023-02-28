@@ -2,13 +2,15 @@ const express = require('express')
 const items = express.Router()
 const Items = require('../models/items.js')
 
- items.post('/', async (req, res) => {
+
+//CREATE
+items.post('/', async (req, res) => {
     const item = await Items.create(req.body)
     res.json(item)
-  })
+})
 
  // INDEX
- items.get("/", async (req, res) => {
+items.get("/", async (req, res) => {
     try {
       const foundItem = await Items.find({});
       res.status(200).json(foundItem);
@@ -16,18 +18,21 @@ const Items = require('../models/items.js')
       res.status(500).json(error);
       console.log(error)
     }
-  });
+});
 
 //FIND A SPECIFIC ITEM
 items.get('/:id', async (req, res) => {
-    try {
-        const foundItem = await Items.find({
-            where: { items_id: req.params.id }
-        })
-        res.status(200).json(foundItem)
-        console.log("Nice Work")
+    //console.log(req.params.id)
+    try{
+        let id = req.params.id
+       // console.log(req.params.id)
+        const item = await Items.findOne({where: {
+            _id: id
+        }})
+         
+    res.json(item)
     } catch (error) {
-        res.status(500).json(error)
+        res.status(500).json(error);
         console.log(error)
     }
 })
@@ -43,18 +48,6 @@ items.get('/:id/edit', (req, res) => {
     
   })
 
-
-// CREATE
-// items.post('/', async(req, res) => {
-//     try {
-//         const newItem = await Items.create(req.body)
-//         res.status(200).json(newItem);
-
-//     } catch (error) {
-//         console.log(error.message);
-//         res.status(500).json({message: error.message})
-//     }
-// })
 
 // DELETE 
 items.delete('/:id', async (req, res) => {
@@ -87,7 +80,7 @@ items.get('/new', (req, res) => {
 items.put('/:id', (res, req) => {
     Items.findByIdAndUpdate(req.params.id, req.body, { new: true }) 
     .then(updatedItem => {
-      console.log(updatedItem) 
+      
       res.redirect(`/items/${req.params.id}`) 
     })
 })

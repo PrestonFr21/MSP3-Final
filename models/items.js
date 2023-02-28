@@ -9,6 +9,9 @@ const ItemsSchema = new Schema ({
     price: {
         type: Number,
     },
+    description: {
+        type: String,
+    },
     forSale: {
         type: Boolean,
     },
