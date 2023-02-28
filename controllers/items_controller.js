@@ -1,20 +1,30 @@
-const express = require('express')
-const res = require('express/lib/response')
-const items = require('express').Router;
-const db = require("../models");
-const Items = require('../models/items.js')
+const express = require('express');
+const items = require('express').Router();
+// const db = require("../models");
+const Items = require('../models/items');
 
 
  // INDEX
-items.get('/', (req, res) => {
-    Items.find()
-        .then(foundItems => {
-            res.render('index', {
-                Items: foundItems,
-                title: 'Index Page'
-            })
-        })
-})
+// items.get("/", (req, res) => {
+//     Items.find()
+//         .then(foundItems => {
+//             res.render('index', {
+//                 Items: foundItems,
+//                 title: 'Index Page'
+//             })
+//         })
+// })
+
+// INDEX
+items.get("/", async (req, res) => {
+    try {
+      const foundItem = await Items.find({});
+      res.status(200).json(foundItem);
+    } catch (error) {
+      res.status(500).json(error);
+      console.log(error)
+    }
+  });
 
 //FIND A SPECIFIC INGREDIENT
 items.get('/:id', async (req, res) => {
