@@ -3,11 +3,7 @@ const items = express.Router()
 const Items = require('../models/items.js')
 
 
-//CREATE
-items.post('/', async (req, res) => {
-    const item = await Items.create(req.body)
-    res.json(item)
-})
+
 
  // INDEX
 items.get("/", async (req, res) => {
@@ -22,13 +18,9 @@ items.get("/", async (req, res) => {
 
 //FIND A SPECIFIC ITEM
 items.get('/:id', async (req, res) => {
-    //console.log(req.params.id)
     try{
         let id = req.params.id
-       // console.log(req.params.id)
-        const item = await Items.findOne({where: {
-            _id: id
-        }})
+        const item = await Items.findById(id)
          
     res.json(item)
     } catch (error) {
@@ -36,6 +28,8 @@ items.get('/:id', async (req, res) => {
         console.log(error)
     }
 })
+
+
 
 // EDIT
 items.get('/:id/edit', (req, res) => {
@@ -76,14 +70,20 @@ items.get('/new', (req, res) => {
       })
 })
 
-//UPDATE
-items.put('/:id', (res, req) => {
-    Items.findByIdAndUpdate(req.params.id, req.body, { new: true }) 
-    .then(updatedItem => {
+// //UPDATE
+// items.put('/:id', (res, req) => {
+//     Items.findByIdAndUpdate(req.params.id, req.body, { new: true }) 
+//     .then(updatedItem => {
       
-      res.redirect(`/items/${req.params.id}`) 
-    })
-})
+//       res.redirect(`/items/${req.params.id}`) 
+//     })
+// })
+
+// //CREATE
+// items.post('/', async (req, res) => {
+//     const item = await Items.create(req.body)
+//     res.json(item)
+// })
 
 
 module.exports = items
