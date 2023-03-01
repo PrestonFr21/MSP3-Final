@@ -52,26 +52,13 @@ items.get('/:id/edit', async (req, res) => {
     
   })
 
-// DELETE 
-// items.delete('/:id', async (req, res) => {
-//     try {
-//         let id = req.params.id
-//         const deletedItem = await Items.destroy(id)
-//         res.status(200).json({
-//             message: `Successfully deleted`
-//         })
-//     } catch(err) {
-//         res.status(500).json(err)
-//         console.log("broken")
-//     }
-// })
-
+// DELETE
 items.delete('/:id', async (req, res) => {
         const item = await Items.findByIdAndDelete(req.params.id)
         res.json(item)
 })
 
-// in the new route
+// NEW ITEM
 items.get('/new', (req, res) => {
     Items.find()
         .then(foundItems => {
