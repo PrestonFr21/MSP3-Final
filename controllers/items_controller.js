@@ -29,34 +29,26 @@ items.get('/:id', async (req, res) => {
 
 
 
-// EDIT
-items.put('/:id/edit', async (req, res) => {
+// EDIT PAGE
+items.get('/:id/edit', async (req, res) => {
     let id = req.params.id
         const item = await Items.findById({id})
         
         if (!item) {
             res.status(404).json({ message: `Could not find movie with id "${id}"` })
         } else {
-            Object.assign(item, req.body)
-            await item.save()
             res.json(item)
-            
         }
     
   })
 
+//UPDATE
   items.put('/:id', async (req, res) => {
-    let id = req.params.id
-        const item = await Items.findById({id})
-        
-        if (!item) {
-            res.status(404).json({ message: `Could not find movie with id "${id}"` })
-        } else {
-            Object.assign(item, req.body)
-            await item.save()
-            res.json(item)
-            
-        }
+    const item = Items.findByIdAndUpdate(req.params.id, req.body, { new: true }) 
+    .then(updatedItems => {
+      console.log(updatedItems)
+      res.json(item)
+    })
     
   })
 
