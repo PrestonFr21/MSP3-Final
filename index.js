@@ -31,7 +31,7 @@ app.use('/items', itemsController)
 
 // USERS
 const usersController = require('./controllers/users_controller.js')
-app.use('/users', usersController)
+app.use('/user', usersController)
 
 // 404 PAGE
 app.get('*', (req, res) => {

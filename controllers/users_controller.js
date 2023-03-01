@@ -1,12 +1,23 @@
 const express = require('express')
-const users = express.Router()
-const Users = require('../models/users.js')
+const user = express.Router()
+const User = require('../models/user.js')
+
+// Find all users 
+user.get('/', async (req, res) => {
+    try {
+      const foundUser = await User.find({});
+      res.status(200).json(foundUser);
+    } catch (error) {
+      res.status(500).json(error);
+      console.log(error)
+    }
+  });
 
 
  // LOGIN
- users.get("/login", async (req, res) => {
+ user.get("/login", async (req, res) => {
     try {
-      const foundUser = await Users.find({});
+      const foundUser = await User.find({});
       res.status(200).json(foundUser);
     } catch (error) {
       res.status(500).json(error);
@@ -15,9 +26,9 @@ const Users = require('../models/users.js')
 });
 
 // SIGN UP
-users.get("/signup", async (req, res) => {
+user.get("/signup", async (req, res) => {
     try {
-      const foundUser = await Users.find({});
+      const foundUser = await User.find({});
       res.status(200).json(foundUser);
     } catch (error) {
       res.status(500).json(error);
@@ -26,9 +37,10 @@ users.get("/signup", async (req, res) => {
 });
 
 //CREATE
-users.post('/', async (req, res) => {
-    const user = await Users.create(req.body)
+user.post('/', async (req, res) => {
+    const user = await User.create(req.body)
     res.json(user)
+    console.log(user)
 })
 
-module.exports = users
+module.exports = user
