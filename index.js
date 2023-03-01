@@ -30,7 +30,7 @@ const itemsController = require('./controllers/items_controller.js')
 app.use('/items', itemsController)
 
 // USERS
-const usersController = require('./controllers/userss_controller.js')
+const usersController = require('./controllers/users_controller.js')
 app.use('/users', usersController)
 
 // 404 PAGE
