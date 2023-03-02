@@ -4,17 +4,6 @@ const items = require('express').Router();
 const Items = require('../models/items');
 
 
- // INDEX
-// items.get("/", (req, res) => {
-//     Items.find()
-//         .then(foundItems => {
-//             res.render('index', {
-//                 Items: foundItems,
-//                 title: 'Index Page'
-//             })
-//         })
-// })
-
 // INDEX
 items.get("/", async (req, res) => {
     try {
