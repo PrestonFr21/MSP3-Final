@@ -71,8 +71,10 @@ items.get('/new', (req, res) => {
 
 //CREATE
 items.post('/', async (req, res) => {
+  console.log(req.body)
     const item = await Items.create(req.body)
     res.json(item)
+
 })
 
 

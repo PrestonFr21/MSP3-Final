@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 require('mongoose-type-url');
 const Schema  = mongoose.Schema;
 
+
 const ItemsSchema = new Schema ({
     name: {
         type: String,
@@ -23,9 +24,9 @@ const ItemsSchema = new Schema ({
     },
 
     user: {
-        type: String,
+        type: Schema.Types.ObjectId,
         ref: 'User'
-    },
+    }
 });
 
 const Items = mongoose.model('Item', ItemsSchema);

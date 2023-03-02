@@ -36,11 +36,21 @@ user.get("/signup", async (req, res) => {
     }
 });
 
+// SIGN UP
+user.get("/account", async (req, res) => {
+    try {
+      const foundUser = await User.find({});
+      res.status(200).json(foundUser);
+    } catch (error) {
+      res.status(500).json(error);
+      console.log(error)
+    }
+});
+
 //CREATE
 user.post('/', async (req, res) => {
     const user = await User.create(req.body)
     res.json(user)
-    console.log(user)
 })
 
 module.exports = user
