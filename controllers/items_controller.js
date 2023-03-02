@@ -46,7 +46,6 @@ items.get('/:id/edit', async (req, res) => {
   items.put('/:id', async (req, res) => {
     const item = Items.findByIdAndUpdate(req.params.id, req.body, { new: true }) 
     .then(updatedItems => {
-      console.log(updatedItems)
       res.json(item)
     })
     
@@ -71,7 +70,6 @@ items.get('/new', (req, res) => {
 
 //CREATE
 items.post('/', async (req, res) => {
-  console.log(req.body)
     const item = await Items.create(req.body)
     res.json(item)
 
