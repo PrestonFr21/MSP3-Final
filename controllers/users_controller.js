@@ -27,6 +27,28 @@ user.get('/:id', async (req, res) => {
     }
 })
 
+ // Login
+ user.get("/login", async (req, res) => {
+    try {
+      const foundUser = await User.find({});
+      res.status(200).json(foundUser);
+    } catch (error) {
+      res.status(500).json(error);
+      console.log(error)
+    }
+});
+
+// Sign Up
+user.get("/signup", async (req, res) => {
+    try {
+      const foundUser = await User.find({});
+      res.status(200).json(foundUser);
+    } catch (error) {
+      res.status(500).json(error);
+      console.log(error)
+    }
+});
+
 // Create user 
 user.post("/", async(req, res) => {
     try {
