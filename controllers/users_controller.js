@@ -53,4 +53,17 @@ user.post('/', async (req, res) => {
     res.json(user)
 })
 
+//PURCHASE
+user.get("/purchase", async (req, res) => {
+  try {
+    const foundUser = await User.find({});
+    res.status(200).json(foundUser);
+  } catch (error) {
+    res.status(500).json(error);
+    console.log(error)
+  }
+});
+
+
+
 module.exports = user
